@@ -186,7 +186,7 @@ publish () {
 		[ "$debug" == "1" ] && (>&2 echo -e "${PURPLE}$mqtt_topicpath$1 { confidence : $2, name : $name, scan_duration_ms: $4, timestamp : $stamp} ${NC}")
 
 		#POST TO MQTT
-		$mosquitto_pub_path -h "$mqtt_address" -p "${mqtt_port:=1883}" -u "$mqtt_user" -P "$mqtt_password" -t "$mqtt_topicpath$1" -m "{\"confidence\":\"$2\",\"name\":\"$name\",\"scan_duration_ms\":\"$4\",\"timestamp\":\"$stamp\"}"
+		$mosquitto_pub_path -h "$mqtt_address" -p "${mqtt_port:=1883}" --capath /etc/ssl/certs/ -u "$mqtt_user" -P "$mqtt_password" -t "$mqtt_topicpath$1" -m "{\"confidence\":\"$2\",\"name\":\"$name\",\"scan_duration_ms\":\"$4\",\"timestamp\":\"$stamp\"}"
 	fi
 }
 
